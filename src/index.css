@@ -1,0 +1,48 @@
+:root {
+  --bg-void: #0a0c0a;
+  --bg-panel: #14170f;
+  --bg-panel-raised: #1c2016;
+  --border-olive: #3a3f2e;
+  --border-olive-light: #4d5439;
+  --accent-amber: #d4a017;
+  --accent-amber-bright: #f0b429;
+  --text-primary: #c9c9be;
+  --text-dim: #6f7566;
+  --danger: #b83227;
+  --danger-bg: #2a1512;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-void);
+  background-image:
+    radial-gradient(circle at 50% 0%, rgba(58, 63, 46, 0.15), transparent 60%);
+  color: var(--text-primary);
+  font-family: 'Share Tech Mono', monospace;
+  min-height: 100vh;
+}
+
+h1, h2, h3 {
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent-amber-bright);
+}
+
+button {
+  font-family: 'Oswald', sans-serif;
+  cursor: pointer;
+}
+
+input {
+  font-family: 'Share Tech Mono', monospace;
+}
+
+a {
+  color: var(--accent-amber);
+}
