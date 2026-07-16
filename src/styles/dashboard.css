@@ -1,0 +1,53 @@
+.dashboard-page {
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-olive);
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.logout-btn {
+  background: transparent;
+  border: 1px solid var(--danger);
+  color: var(--danger);
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.logout-btn:hover {
+  background-color: var(--danger-bg);
+}
+
+.dashboard-card {
+  background-color: var(--bg-panel);
+  border: 1px solid var(--border-olive);
+  border-left: 3px solid var(--accent-amber);
+  padding: 1.5rem;
+  max-width: 320px;
+}
+
+.dashboard-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  letter-spacing: 0.08em;
+  margin-top: 0.75rem;
+}
+
+.dashboard-label:first-child {
+  margin-top: 0;
+}
+
+.dashboard-value {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.2rem;
+  color: var(--accent-amber-bright);
+}
