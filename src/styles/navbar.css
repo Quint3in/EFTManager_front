@@ -1,0 +1,98 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--bg-panel);
+  border-bottom: 1px solid var(--border-olive);
+  padding: 0.85rem 1.5rem;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.navbar-brand {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-amber-bright);
+  white-space: nowrap;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 1.25rem;
+  flex: 1;
+}
+
+.navbar-link {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-dim);
+  text-decoration: none;
+  padding-bottom: 0.25rem;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.navbar-link:hover {
+  color: var(--text-primary);
+}
+
+.navbar-link.active {
+  color: var(--accent-amber-bright);
+  border-bottom-color: var(--accent-amber);
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.mode-switch {
+  display: flex;
+  border: 1px solid var(--border-olive);
+  overflow: hidden;
+}
+
+.mode-btn {
+  background-color: transparent;
+  border: none;
+  color: var(--text-dim);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 0.4rem 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.mode-btn:not(:last-child) {
+  border-right: 1px solid var(--border-olive);
+}
+
+.mode-btn.selected {
+  background-color: var(--accent-amber);
+  color: #14170f;
+}
+
+.navbar-username {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.navbar-logout {
+  background: transparent;
+  border: 1px solid var(--danger);
+  color: var(--danger);
+  padding: 0.35rem 0.75rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.navbar-logout:hover {
+  background-color: var(--danger-bg);
+}
