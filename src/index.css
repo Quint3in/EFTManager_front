@@ -10,6 +10,10 @@
   --text-dim: #6f7566;
   --danger: #b83227;
   --danger-bg: #2a1512;
+  --accent-rust: #a1552e;
+  --accent-rust-bg: #2a1810;
+  --accent-steel: #5b7a8c;
+  --accent-steel-bg: #16232a;
 }
 
 * {
@@ -45,4 +49,8 @@ input {
 
 a {
   color: var(--accent-amber);
+}
+
+.app-content {
+  padding: 2rem;
 }

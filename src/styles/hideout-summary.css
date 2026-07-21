@@ -1,0 +1,115 @@
+.hideout-summary {
+  background-color: var(--bg-panel);
+  border: 1px solid var(--border-olive);
+  position: sticky;
+  top: 1rem;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+}
+
+.summary-section {
+  border-top: 3px solid;
+  padding: 1rem;
+}
+
+.summary-section.raid {
+  border-top-color: var(--accent-rust);
+}
+
+.summary-section.regular {
+  border-top-color: var(--accent-steel);
+}
+
+.summary-section + .summary-section {
+  border-top-width: 1px;
+  border-top-color: var(--border-olive);
+  margin-top: 0;
+}
+
+.summary-section:first-child {
+  border-top: 3px solid var(--accent-rust);
+}
+
+.summary-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+
+.summary-icon-svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.summary-section.raid .summary-icon-svg {
+  color: var(--accent-rust);
+}
+
+.summary-section.regular .summary-icon-svg {
+  color: var(--accent-steel);
+}
+
+.summary-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.summary-count {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--text-dim);
+}
+
+.summary-note {
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  font-style: italic;
+  margin: 0 0 0.7rem 0;
+  line-height: 1.3;
+}
+
+.summary-empty {
+  color: var(--text-dim);
+  font-size: 0.78rem;
+}
+
+.summary-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.summary-section li {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.8rem;
+  padding: 0.3rem 0;
+  border-bottom: 1px solid rgba(58, 63, 46, 0.4);
+}
+
+.summary-section li:last-child {
+  border-bottom: none;
+}
+
+.summary-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  background-color: var(--bg-void);
+  border: 1px solid var(--border-olive);
+  flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+  .hideout-summary {
+    position: static;
+    max-height: none;
+  }
+}

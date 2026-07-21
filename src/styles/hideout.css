@@ -1,0 +1,317 @@
+.hideout-page {
+  max-width: 1800px;
+  margin: 0 auto;
+}
+
+.hideout-title {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.hideout-title h2 {
+  margin: 0;
+}
+
+.hideout-title .mode-tag {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  border: 1px solid var(--border-olive);
+  padding: 0.15rem 0.5rem;
+}
+
+.hideout-loading {
+  padding: 2rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.9rem;
+}
+
+.hideout-error {
+  background-color: var(--danger-bg);
+  border-left: 3px solid var(--danger);
+  color: #e08a80;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.85rem;
+  margin-bottom: 1.25rem;
+}
+
+.hideout-layout {
+  display: grid;
+  grid-template-columns: 1fr minmax(360px, 460px);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .hideout-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Grid de estaciones, estilo "tetris" --- */
+.hideout-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.1rem;
+  align-items: start;
+}
+
+.station-card {
+  background-color: var(--bg-panel);
+  background-image:
+    repeating-linear-gradient(0deg, rgba(212, 160, 23, 0.025) 0px, rgba(212, 160, 23, 0.025) 1px, transparent 1px, transparent 24px),
+    repeating-linear-gradient(90deg, rgba(212, 160, 23, 0.025) 0px, rgba(212, 160, 23, 0.025) 1px, transparent 1px, transparent 24px);
+  border: 1px solid var(--border-olive);
+  border-top: 3px solid var(--accent-amber);
+}
+
+.station-header {
+  display: flex;
+  gap: 0.85rem;
+  align-items: center;
+  padding: 1rem 1rem 0.85rem 1rem;
+}
+
+.station-image {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  background-color: var(--bg-void);
+  border: 1px solid var(--border-olive);
+  flex-shrink: 0;
+}
+
+.station-title-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.station-title-block h3 {
+  font-size: 0.92rem;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* --- Stepper de nivel: pips + botones +/- --- */
+.level-stepper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.level-btn {
+  background-color: transparent;
+  border: 1px solid var(--border-olive-light);
+  color: var(--text-primary);
+  width: 20px;
+  height: 20px;
+  font-size: 0.85rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.level-btn:hover:not(:disabled) {
+  border-color: var(--accent-amber);
+  color: var(--accent-amber-bright);
+}
+
+.level-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.pip-track {
+  display: flex;
+  gap: 3px;
+}
+
+.pip {
+  width: 10px;
+  height: 14px;
+  background-color: var(--bg-void);
+  border: 1px solid var(--border-olive);
+}
+
+.pip.filled {
+  background-color: var(--accent-amber);
+  border-color: var(--accent-amber);
+}
+
+.level-text {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  margin-left: 0.15rem;
+}
+
+/* --- Bloques de requisitos por nivel --- */
+.station-requirements {
+  border-top: 1px solid var(--border-olive);
+  padding: 0.85rem 1rem 1rem 1rem;
+}
+
+.station-maxed {
+  color: var(--accent-amber);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.85rem 1rem 1rem 1rem;
+  border-top: 1px solid var(--border-olive);
+  margin: 0;
+}
+
+.level-block {
+  border: 1px solid var(--border-olive);
+  margin-bottom: 0.85rem;
+  overflow: hidden;
+}
+
+.level-block:last-child {
+  margin-bottom: 0;
+}
+
+.level-title {
+  background-color: var(--bg-panel-raised);
+  border-bottom: 1px solid var(--border-olive);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  color: var(--accent-amber-bright);
+  letter-spacing: 0.05em;
+  padding: 0.35rem 0.6rem;
+  margin: 0;
+}
+
+.level-body {
+  padding: 0.7rem 0.85rem;
+}
+
+.level-time-only {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  font-style: italic;
+  margin: 0;
+}
+
+.req-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 0.7rem;
+}
+
+.req-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  width: 72px;
+  text-align: center;
+  border-top: 2px solid transparent;
+  padding-top: 0.4rem;
+}
+
+.req-chip.trader { border-top-color: var(--accent-steel); }
+.req-chip.station { border-top-color: var(--border-olive-light); }
+.req-chip.skill { border-top-color: var(--accent-amber); }
+
+.req-chip-icon {
+  width: 40px;
+  height: 40px;
+  background-color: var(--bg-void);
+  border: 1px solid var(--border-olive);
+  flex-shrink: 0;
+}
+
+.req-chip.trader .req-chip-icon {
+  object-fit: cover;
+}
+
+.req-chip.station .req-chip-icon,
+.req-chip.skill .req-chip-icon {
+  object-fit: contain;
+}
+
+.req-chip-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Oswald', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-dim);
+}
+
+.req-chip.trader .req-chip-placeholder { color: var(--accent-steel); }
+.req-chip.station .req-chip-placeholder { color: var(--border-olive-light); }
+.req-chip.skill .req-chip-placeholder { color: var(--accent-amber); }
+
+.req-chip-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  color: var(--text-primary);
+  word-break: break-word;
+}
+
+.level-block ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.6rem 0;
+}
+
+.requirement-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.82rem;
+  padding: 0.25rem 0.4rem;
+  border-left: 2px solid transparent;
+}
+
+.requirement-item.fir {
+  border-left-color: var(--accent-rust);
+  background-color: var(--accent-rust-bg);
+}
+
+.fir-tag {
+  color: var(--accent-rust);
+  font-weight: 600;
+  margin-left: 0.15rem;
+}
+
+.requirement-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  background-color: var(--bg-void);
+  border: 1px solid var(--border-olive);
+  flex-shrink: 0;
+}
+
+.level-up-action {
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0;
+  cursor: default;
+}
+
+.station-card.is-updating {
+  opacity: 0.55;
+  pointer-events: none;
+}
