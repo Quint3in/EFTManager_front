@@ -3,18 +3,53 @@ import axiosClient from '../api/axiosClient';
 import { useGameMode } from '../context/GameModeContext';
 import { extractItemIds, buildItemsLookup, formatDuration } from '../utils/hideoutItems';
 import { extractTraderIds, buildTradersLookup } from '../utils/hideoutTraders';
+import { extractSkillIds, buildSkillsLookup, formatSkillCode } from '../utils/hideoutSkills';
 import HideoutSummary from '../components/HideoutSummary';
 import RequirementChip from '../components/RequirementChip';
 import '../styles/hideout.css';
+
 
 export default function HideoutPage() {
   const { mode } = useGameMode();
   const [stations, setStations] = useState([]);
   const [itemsLookup, setItemsLookup] = useState({});
   const [tradersLookup, setTradersLookup] = useState({});
+  const [skillsLookup, setSkillsLookup] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [updatingId, setUpdatingId] = useState(null);
+  const [layout, setLayoutState] = useState(() => localStorage.getItem('hideoutLayout') || 'side');
+
+  function setLayout(newLayout) {
+  localStorage.setItem('hideoutLayout', newLayout);
+  setLayoutState(newLayout);
+}
+
+function SideLayoutIcon() {
+  return (
+    <svg viewBox="0 0 20 16" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <rect x="1" y="1" width="12" height="14" />
+      <rect x="15" y="1" width="4" height="14" />
+    </svg>
+  );
+}
+
+function StackedLayoutIcon() {
+  return (
+    <svg viewBox="0 0 20 16" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <rect x="1" y="1" width="18" height="9" />
+      <rect x="1" y="12" width="18" height="3" />
+    </svg>
+  );
+}
+function SummaryTopLayoutIcon() {
+  return (
+    <svg viewBox="0 0 20 16" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <rect x="1" y="1" width="18" height="3" />
+      <rect x="1" y="6" width="18" height="9" />
+    </svg>
+  );
+}
 
   useEffect(() => {
     loadHideout();
@@ -23,29 +58,35 @@ export default function HideoutPage() {
 
   // Comprueba qué ids de items/traders NO están ya resueltos en los lookups dados,
   // y solo pide esos a la API. Devuelve los nuevos lookups parciales (pueden venir vacíos).
-  async function resolveMissingLookups(stationsToCheck, knownItemsLookup, knownTradersLookup) {
+  async function resolveMissingLookups(stationsToCheck, knownItemsLookup, knownTradersLookup, knownSkillsLookup) {
     const allItemIds = extractItemIds(stationsToCheck);
     const allTraderIds = extractTraderIds(stationsToCheck);
+    const allSkillIds = extractSkillIds(stationsToCheck);
 
     const missingItemIds = allItemIds.filter((id) => !(id in knownItemsLookup));
     const missingTraderIds = allTraderIds.filter((id) => !(id in knownTradersLookup));
+    const missingSkillIds = allSkillIds.filter((id) => !(id in knownSkillsLookup));
 
-    if (missingItemIds.length === 0 && missingTraderIds.length === 0) {
-      return { items: {}, traders: {} };
+    if (missingItemIds.length === 0 && missingTraderIds.length === 0 && missingSkillIds.length === 0) {
+      return { items: {}, traders: {}, skills: {} };
     }
 
-    const [itemsResult, tradersResult] = await Promise.all([
+    const [itemsResult, tradersResult, skillsResult] = await Promise.all([
       missingItemIds.length > 0
         ? axiosClient.get('/items', { params: { mode, ids: missingItemIds.join(',') } })
         : Promise.resolve({ data: [] }),
       missingTraderIds.length > 0
         ? axiosClient.get('/traders', { params: { mode, ids: missingTraderIds.join(',') } })
         : Promise.resolve({ data: [] }),
+      missingSkillIds.length > 0
+        ? axiosClient.get('/skills', { params: { mode, ids: missingSkillIds.join(',') } })
+        : Promise.resolve({ data: [] }),
     ]);
 
     return {
       items: buildItemsLookup(itemsResult.data),
       traders: buildTradersLookup(tradersResult.data),
+      skills: buildSkillsLookup(skillsResult.data),
     };
   }
 
@@ -56,9 +97,10 @@ export default function HideoutPage() {
       const { data: stationsData } = await axiosClient.get(`/hideout/${mode}`);
       setStations(stationsData);
 
-      const { items, traders } = await resolveMissingLookups(stationsData, {}, {});
+      const { items, traders, skills } = await resolveMissingLookups(stationsData, {}, {}, {});
       setItemsLookup(items);
       setTradersLookup(traders);
+      setSkillsLookup(skills);
     } catch (err) {
       setError('No se pudo cargar el hideout');
     } finally {
@@ -79,13 +121,16 @@ export default function HideoutPage() {
 
       // Resolvemos primero lo que falte, ANTES de tocar "stations",
       // así el componente no llega a pintar IDs crudos en ningún momento.
-      const { items, traders } = await resolveMissingLookups(updatedStations, itemsLookup, tradersLookup);
+      const { items, traders, skills } = await resolveMissingLookups(updatedStations, itemsLookup, tradersLookup, skillsLookup);
 
       if (Object.keys(items).length > 0) {
         setItemsLookup((prev) => ({ ...prev, ...items }));
       }
       if (Object.keys(traders).length > 0) {
         setTradersLookup((prev) => ({ ...prev, ...traders }));
+      }
+      if (Object.keys(skills).length > 0) {
+        setSkillsLookup((prev) => ({ ...prev, ...skills }));
       }
 
       setStations(updatedStations);
@@ -105,10 +150,37 @@ export default function HideoutPage() {
       <div className="hideout-title">
         <h2>Hideout</h2>
         <span className="mode-tag">{mode.toUpperCase()}</span>
+
+        <div className="mode-switch layout-switch">
+          <button
+            className={`mode-btn icon-btn ${layout === 'side' ? 'selected' : ''}`}
+            onClick={() => setLayout('side')}
+            title="Vista lateral"
+            aria-label="Vista lateral"
+          >
+            <SideLayoutIcon />
+          </button>
+          <button
+            className={`mode-btn icon-btn ${layout === 'stacked' ? 'selected' : ''}`}
+            onClick={() => setLayout('stacked')}
+            title="Vista apilada"
+            aria-label="Vista apilada"
+          >
+            <StackedLayoutIcon />
+          </button>
+            <button
+              className={`mode-btn icon-btn ${layout === 'summary-top' ? 'selected' : ''}`}
+              onClick={() => setLayout('summary-top')}
+              title="Resumen arriba"
+              aria-label="Resumen arriba"
+            >
+            <SummaryTopLayoutIcon />
+          </button>
+        </div>
       </div>
       {error && <div className="hideout-error">{error}</div>}
 
-      <div className="hideout-layout">
+      <div className={`hideout-layout ${layout}`}>
         <div className="hideout-grid">
           {stations.map((station) => (
             <div
@@ -184,15 +256,18 @@ export default function HideoutPage() {
                                   level={s.level}
                                 />
                               ))}
-                              {levelReq.skillRequirements.map((s) => (
-                                <RequirementChip
-                                  key={s.skill}
-                                  type="skill"
-                                  imageLink={null}
-                                  label={s.skill}
-                                  level={s.level}
-                                />
-                              ))}
+                              {levelReq.skillRequirements.map((s) => {
+                                const skill = skillsLookup[s.skill];
+                                return (
+                                  <RequirementChip
+                                    key={s.skill}
+                                    type="skill"
+                                    imageLink={skill?.imageLink}
+                                    label={skill ? skill.name : formatSkillCode(s.skill)}
+                                    level={s.level}
+                                  />
+                                );
+                              })}
                             </div>
                           )}
 
