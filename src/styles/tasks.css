@@ -1,0 +1,437 @@
+.tasks-page {
+  max-width: 1900px;
+  margin: 0 auto;
+}
+
+.tasks-title {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.tasks-controls {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.tasks-filter-select {
+  background-color: var(--bg-void);
+  border: 1px solid var(--border-olive);
+  color: var(--text-primary);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.8rem;
+  padding: 0.55rem 0.6rem;
+  cursor: pointer;
+}
+
+.tasks-filter-select:hover {
+  border-color: var(--accent-amber);
+}
+
+.tasks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.task-card {
+  display: flex;
+  align-items: stretch;
+  background-color: var(--bg-panel);
+  border: 1px solid var(--border-olive);
+  border-left: 3px solid var(--accent-amber);
+  transition: opacity 0.15s ease;
+}
+
+.task-card.completed {
+  border-left-color: var(--accent-steel);
+  opacity: 0.65;
+}
+
+.task-card-main {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  flex: 1;
+  min-width: 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+.task-image {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border: 1px solid var(--border-olive);
+  flex-shrink: 0;
+}
+
+.task-info {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.task-name {
+  font-size: 0.85rem;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.task-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.7rem;
+  color: var(--text-dim);
+}
+
+.task-trader-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.task-level {
+  border-left: 1px solid var(--border-olive);
+  padding-left: 0.35rem;
+}
+
+.task-kappa {
+  color: var(--accent-amber);
+  font-weight: 600;
+  font-size: 0.7rem;
+  border: 1px solid var(--accent-amber);
+  padding: 0.05rem 0.4rem;
+}
+
+.task-kappa.lightkeeper {
+  color: var(--accent-steel);
+  border-color: var(--accent-steel);
+}
+
+.task-exp {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--accent-amber-bright);
+  margin: 0;
+}
+
+.task-complete-btn {
+  width: 42px;
+  flex-shrink: 0;
+  background-color: var(--bg-void);
+  border: none;
+  border-left: 1px solid var(--border-olive);
+  color: var(--text-dim);
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.task-complete-btn:hover {
+  background-color: var(--bg-panel-raised);
+  color: var(--accent-amber-bright);
+}
+
+.task-complete-btn.completed {
+  background-color: var(--accent-steel-bg);
+  color: var(--accent-steel);
+}
+.tasks-body {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (max-width: 800px) {
+  .tasks-body {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tasks-sidebar {
+  background-color: var(--bg-panel);
+  border: 1px solid var(--border-olive);
+  border-top: 3px solid var(--accent-amber);
+  padding: 1rem;
+  position: sticky;
+  top: 1rem;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+}
+
+.tasks-sidebar-title {
+  font-size: 0.85rem;
+  margin: 0 0 0.75rem 0;
+}
+
+.trader-side-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  text-align: left;
+  padding: 0.4rem 0.3rem;
+  cursor: pointer;
+}
+
+.trader-side-item:hover {
+  color: var(--text-primary);
+  background-color: var(--bg-panel-raised);
+}
+
+.trader-side-item.active {
+  color: var(--accent-amber-bright);
+  background-color: var(--bg-panel-raised);
+  font-weight: 600;
+}
+
+.trader-side-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border-olive);
+  flex-shrink: 0;
+}
+
+.trader-side-item.active .trader-side-avatar {
+  border-color: var(--accent-amber);
+}
+
+.trader-side-all-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 2px solid var(--border-olive);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  background-color: var(--bg-void);
+  color: var(--text-dim);
+}
+
+.trader-side-item.active .trader-side-all-icon {
+  border-color: var(--accent-amber);
+  color: var(--accent-amber-bright);
+}
+
+.tasks-controls {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.mode-tag {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  border: 1px solid var(--border-olive);
+  padding: 0.15rem 0.5rem;
+}
+
+.tasks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1rem;
+}
+
+.task-name {
+  font-size: 0.85rem;
+  margin: 0 0 0.3rem 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.25em;
+  min-height: 2.5em;
+}
+
+.task-map-name {
+  font-size: 0.7rem;
+  color: var(--accent-steel);
+  margin: 0.15rem 0;
+}
+
+.task-badges-row {
+  display: flex;
+  gap: 0.35rem;
+  margin: 0.2rem 0;
+}
+
+.tasks-controls {
+  display: flex;
+  align-items: stretch;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.tasks-controls .market-search {
+  flex: 1;
+  min-width: 200px;
+  height: 42px;
+  margin-bottom: 0;
+}
+
+.tasks-filter-select {
+  height: 42px;
+  min-width: 160px;
+  background-color: var(--bg-void);
+  border: 1px solid var(--border-olive);
+  color: var(--text-primary);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.8rem;
+  padding: 0 0.7rem;
+  cursor: pointer;
+}
+
+.tasks-filter-select:hover {
+  border-color: var(--accent-amber);
+}
+
+.kappa-toggle-icon {
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  background-color: var(--bg-void);
+  border: 2px solid var(--border-olive);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.kappa-toggle-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.kappa-toggle-icon:hover {
+  border-color: var(--accent-amber);
+}
+
+.kappa-toggle-icon.active {
+  border-color: var(--accent-amber);
+  box-shadow: 0 0 0 2px rgba(212, 160, 23, 0.3);
+}
+
+.trader-side-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.trader-side-track {
+  height: 4px;
+  background-color: var(--bg-void);
+  border: 1px solid var(--border-olive);
+  overflow: hidden;
+}
+
+.trader-side-fill {
+  height: 100%;
+  background-color: var(--accent-amber);
+}
+
+.trader-side-count {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.62rem;
+  color: var(--text-dim);
+}
+
+.task-card {
+  position: relative;
+}
+
+.task-blocked-badge {
+  position: absolute;
+  top: 6px;
+  right: 44px;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  background-color: rgba(10, 12, 10, 0.85);
+  border: 1px solid var(--accent-rust);
+  cursor: pointer;
+  z-index: 2;
+}
+
+.compare-cta {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  border: 1px solid var(--accent-steel);
+  color: var(--accent-steel);
+  text-decoration: none;
+  font-size: 0.78rem;
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.compare-cta:hover {
+  background-color: var(--accent-steel-bg);
+  color: var(--text-primary);
+}
+
+.compare-cta-icon {
+  font-size: 1rem;
+}
+
+.lightkeeper-avatar {
+  border-radius: 50%;
+}
+
+.task-blocked-wrap {
+  position: absolute;
+  top: 6px;
+  right: 44px;
+  z-index: 2;
+}
+
+.task-blocked-wrap .task-blocked-badge {
+  position: static;
+}
+
+.task-blocked-menu {
+  top: calc(100% + 4px);
+  right: 0;
+  min-width: 200px;
+}
+
+.task-blocked-menu-title {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  letter-spacing: 0.04em;
+  padding: 0.5rem 0.9rem 0.3rem;
+  margin: 0;
+}

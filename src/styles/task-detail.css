@@ -1,0 +1,340 @@
+.task-detail-page {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.task-detail-header {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.task-detail-image {
+  width: 84px;
+  height: 84px;
+  object-fit: cover;
+  border: 1px solid var(--border-olive);
+  flex-shrink: 0;
+}
+
+.task-detail-header-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.task-detail-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.task-detail-title-row h2 {
+  margin: 0;
+}
+
+.task-detail-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.task-wiki-link {
+  font-size: 0.75rem;
+  color: var(--accent-steel);
+  text-decoration: none;
+  width: fit-content;
+}
+
+.task-wiki-link:hover {
+  color: var(--accent-amber-bright);
+}
+
+.task-detail-complete-btn {
+  background-color: transparent;
+  border: 1px solid var(--accent-amber);
+  color: var(--accent-amber-bright);
+  padding: 0.6rem 1.1rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.task-detail-complete-btn:hover {
+  background-color: var(--bg-panel-raised);
+}
+
+.task-detail-complete-btn.completed {
+  background-color: var(--accent-steel-bg);
+  border-color: var(--accent-steel);
+  color: var(--accent-steel);
+}
+
+.objectives-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.objective-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(58, 63, 46, 0.4);
+}
+
+.objective-row:last-child {
+  border-bottom: none;
+}
+
+.objective-desc {
+  font-size: 0.83rem;
+}
+
+.objective-optional {
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+.task-exp-reward {
+  font-family: 'Share Tech Mono', monospace;
+  color: var(--accent-amber-bright);
+  font-size: 0.95rem;
+  margin: 0 0 0.75rem 0;
+}
+
+.objective-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.3rem;
+}
+
+.objective-badge {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  border: 1px solid var(--border-olive);
+  padding: 0.1rem 0.4rem;
+}
+
+.objective-badge.fir {
+  color: var(--accent-rust);
+  border-color: var(--accent-rust);
+}
+
+.objective-row-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
+
+.objective-items-preview {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.objective-preview-icon {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  background-color: var(--bg-void);
+  border: 1px solid var(--border-olive);
+  cursor: help;
+}
+
+.objective-items-popover {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background-color: var(--bg-panel);
+  border: 1px solid var(--border-olive);
+  border-top: 2px solid var(--accent-amber);
+  padding: 0.6rem;
+  min-width: 220px;
+  max-height: 260px;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+.objective-items-preview:hover .objective-items-popover {
+  display: block;
+}
+
+.objective-popover-title {
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  margin: 0 0 0.4rem 0;
+}
+
+.objective-items-popover ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.objective-items-popover li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  padding: 0.25rem 0;
+}
+
+.objective-items-popover img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  background-color: var(--bg-void);
+  border: 1px solid var(--border-olive);
+  flex-shrink: 0;
+}
+
+.task-requirements-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.task-req-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid rgba(58, 63, 46, 0.4);
+}
+
+.task-req-row:last-child { border-bottom: none; }
+
+.task-req-name {
+  font-size: 0.82rem;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.task-req-name:hover { color: var(--accent-amber-bright); }
+
+.task-req-status {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+}
+
+.task-req-status.ok { color: var(--accent-amber); }
+.task-req-status.pending { color: var(--accent-rust); }
+
+.standing-rewards-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0 0 0;
+  border-top: 1px solid var(--border-olive);
+  padding-top: 0.6rem;
+}
+
+.standing-reward-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  padding: 0.25rem 0;
+}
+
+.standing-value {
+  color: var(--accent-amber-bright);
+  font-family: 'Share Tech Mono', monospace;
+  margin-left: auto;
+}
+
+.task-detail-flags {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-top: 0.2rem;
+}
+
+.task-flag {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  border: 1px solid var(--border-olive);
+  padding: 0.1rem 0.4rem;
+}
+
+.task-flag.lightkeeper {
+  color: var(--accent-amber);
+  border-color: var(--accent-amber);
+}
+
+.reward-subsection {
+  margin-top: 0.75rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--border-olive);
+}
+
+.reward-subsection-title {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  letter-spacing: 0.04em;
+  margin: 0 0 0.4rem 0;
+}
+
+.objective-maps {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  margin: 0.2rem 0 0 0;
+}
+
+.task-detail-req-chips {
+  margin-top: 0.4rem;
+}
+
+.needed-keys-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.needed-keys-row {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(58, 63, 46, 0.4);
+}
+
+.needed-keys-row:last-child { border-bottom: none; }
+
+.needed-keys-map {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  margin: 0 0 0.4rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.needed-keys-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.view-item-link {
+  margin-left: auto;
+  font-size: 0.68rem;
+  color: var(--accent-steel);
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.view-item-link:hover {
+  color: var(--accent-amber-bright);
+}

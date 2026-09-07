@@ -51,3 +51,133 @@
   font-size: 1.2rem;
   color: var(--accent-amber-bright);
 }
+
+.profile-columns {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (max-width: 700px) {
+  .profile-columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+.password-card {
+  background-color: var(--bg-panel);
+  border: 1px solid var(--border-olive);
+  border-top: 3px solid var(--accent-amber);
+  padding: 1.25rem;
+  max-width: 380px;
+}
+
+.password-card h3 {
+  font-size: 1rem;
+  margin: 0 0 1rem 0;
+}
+
+.password-success {
+  background-color: var(--bg-panel-raised);
+  border-left: 3px solid var(--accent-amber);
+  color: var(--accent-amber-bright);
+  padding: 0.5rem 0.8rem;
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.dashboard-widgets {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.widget-section h3 {
+  font-size: 0.95rem;
+  margin: 0 0 0.75rem 0;
+}
+
+.widget-modes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 700px) {
+  .widget-modes-grid { grid-template-columns: 1fr; }
+}
+
+.widget-mode-card {
+  background-color: var(--bg-panel);
+  border: 1px solid var(--border-olive);
+  border-top: 3px solid var(--accent-amber);
+  padding: 1rem;
+}
+
+.widget-mode-label {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  color: var(--text-dim);
+  margin: 0 0 0.6rem 0;
+}
+
+.widget-progress-track {
+  height: 8px;
+  background-color: var(--bg-void);
+  border: 1px solid var(--border-olive);
+  overflow: hidden;
+}
+
+.widget-progress-fill {
+  height: 100%;
+  background-color: var(--accent-amber);
+}
+
+.widget-progress-text {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  margin: 0.4rem 0 0 0;
+}
+
+.widget-fav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.widget-fav-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  padding: 0.3rem 0;
+  border-bottom: 1px solid rgba(58, 63, 46, 0.4);
+}
+
+.widget-fav-list li:last-child { border-bottom: none; }
+
+.widget-fav-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  background-color: var(--bg-void);
+  border: 1px solid var(--border-olive);
+  flex-shrink: 0;
+}
+
+.widget-fav-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.widget-fav-price {
+  color: var(--accent-amber-bright);
+  font-family: 'Share Tech Mono', monospace;
+  flex-shrink: 0;
+}

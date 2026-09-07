@@ -1,0 +1,330 @@
+.market-page {
+  max-width: 1900px;
+  margin: 0 auto;
+}
+
+.market-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.market-controls .market-search {
+  margin-bottom: 0;
+  flex: 1;
+  max-width: 420px;
+  height: 42px;
+  box-sizing: border-box;
+}
+
+.sort-dropdown {
+  position: relative;
+}
+
+.sort-dropdown-trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background-color: var(--bg-void);
+  border: 1px solid var(--border-olive);
+  color: var(--text-primary);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.8rem;
+  padding: 0.55rem 0.8rem;
+  cursor: pointer;
+}
+
+.sort-dropdown-trigger:hover {
+  border-color: var(--accent-amber);
+}
+
+.sort-dropdown-menu {
+  min-width: 130px;
+}
+
+.market-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 1.1rem;
+  align-items: start;
+}
+
+.market-title {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.market-title h2 {
+  margin: 0;
+}
+
+.market-search {
+  width: 100%;
+  max-width: 420px;
+  background-color: var(--bg-void);
+  border: 1px solid var(--border-olive);
+  color: var(--text-primary);
+  padding: 0.6rem 0.8rem;
+  font-size: 0.9rem;
+  font-family: 'Share Tech Mono', monospace;
+  margin-bottom: 1rem;
+}
+
+.market-search:focus {
+  outline: none;
+  border-color: var(--accent-amber);
+}
+
+.market-count {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+}
+
+.market-card {
+  background-color: var(--bg-panel);
+  border: 1px solid var(--border-olive);
+  border-top: 3px solid var(--accent-amber);
+  padding: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.4rem;
+}
+
+.market-icon {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  background-color: var(--bg-void);
+  border: 1px solid var(--border-olive);
+}
+
+.market-name {
+  font-size: 0.82rem;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2em;
+  min-height: 2.4em;
+  width: 100%;
+}
+
+.market-price-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.market-price {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 1rem;
+  color: var(--accent-amber-bright);
+}
+
+.market-price-block {
+  width: 100%;
+  min-height: 3.6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.15rem;
+}
+
+.market-change {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.7rem;
+}
+
+.market-change.up { color: var(--accent-amber); }
+.market-change.down { color: var(--accent-rust); }
+
+.market-low {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  margin: 0;
+}
+
+.market-pagination {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.market-card {
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+}
+
+.market-no-price {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  font-style: italic;
+  margin: 0.3rem 0;
+}
+
+.market-body {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (max-width: 800px) {
+  .market-body {
+    grid-template-columns: 1fr;
+  }
+}
+
+.market-sidebar {
+  background-color: var(--bg-panel);
+  border: 1px solid var(--border-olive);
+  border-top: 3px solid var(--accent-amber);
+  padding: 1rem;
+  position: sticky;
+  top: 1rem;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+}
+
+.market-sidebar-title {
+  font-size: 0.85rem;
+  margin: 0 0 0.75rem 0;
+}
+
+.category-root-list {
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+}
+
+.category-children {
+  list-style: none;
+  margin: 0;
+  padding-left: 14px;
+  border-left: 1px solid var(--border-olive);
+  margin-left: 7px;
+}
+
+.category-node-li {
+  position: relative;
+}
+
+.category-children > .category-node-li::before {
+  content: '';
+  position: absolute;
+  left: -14px;
+  top: 12px;
+  width: 12px;
+  height: 1px;
+  background-color: var(--border-olive);
+}
+
+.category-node-row {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.category-toggle {
+  background: transparent;
+  border: 1px solid var(--border-olive-light);
+  color: var(--text-dim);
+  width: 16px;
+  height: 16px;
+  font-size: 0.7rem;
+  line-height: 1;
+  padding: 0;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.category-toggle-spacer {
+  width: 16px;
+  flex-shrink: 0;
+}
+
+.category-node {
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  font-size: 0.78rem;
+  text-align: left;
+  padding: 0.3rem 0.2rem;
+  cursor: pointer;
+  width: 100%;
+}
+
+.category-node:hover { color: var(--text-primary); }
+.category-node.active { color: var(--accent-amber-bright); font-weight: 600; }
+
+.category-node-all {
+  display: block;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-olive);
+  padding-bottom: 0.5rem;
+}
+
+.market-card {
+  position: relative;
+}
+
+.favorite-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 12, 10, 0.75);
+  border: 1px solid var(--border-olive);
+  color: var(--text-dim);
+  width: 32px;
+  height: 32px;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+
+.favorite-btn:hover {
+  border-color: var(--accent-amber);
+  color: var(--accent-amber-bright);
+  background-color: var(--bg-panel-raised);
+  transform: scale(1.08);
+}
+
+.favorite-btn.active {
+  color: var(--accent-amber-bright);
+  border-color: var(--accent-amber);
+}
+
+.favorite-btn-overlay {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+}
+.market-title .mode-tag {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  border: 1px solid var(--border-olive);
+  padding: 0.15rem 0.5rem;
+}
+
+.category-count {
+  color: var(--text-dim);
+  font-size: 0.68rem;
+  margin-left: 0.3rem;
+}

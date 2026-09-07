@@ -1,0 +1,51 @@
+.admin-page {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.admin-table {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.admin-delete-btn {
+  background: transparent;
+  border: 1px solid var(--danger);
+  color: var(--danger);
+  padding: 0.3rem 0.7rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.admin-delete-btn:hover {
+  background-color: var(--danger-bg);
+}
+
+.admin-search {
+  max-width: 320px;
+  margin-bottom: 1rem;
+}
+
+.admin-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.admin-role-select {
+  background-color: var(--bg-void);
+  border: 1px solid var(--border-olive);
+  color: var(--text-primary);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.75rem;
+  padding: 0.3rem 0.5rem;
+  cursor: pointer;
+}
+
+.admin-role-select:hover {
+  border-color: var(--accent-amber);
+}
+
+.admin-role-select:focus {
+  outline: none;
+  border-color: var(--accent-amber);
+}

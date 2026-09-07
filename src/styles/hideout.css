@@ -1,5 +1,5 @@
 .hideout-page {
-  max-width: 1800px;
+  max-width: 1900px;
   margin: 0 auto;
 }
 
@@ -41,13 +41,46 @@
 
 .hideout-layout {
   display: grid;
-  grid-template-columns: 1fr minmax(360px, 460px);
   gap: 1.5rem;
   align-items: start;
 }
 
+.hideout-layout.side {
+  grid-template-columns: 1fr minmax(360px, 460px);
+}
+
+.hideout-layout.stacked {
+  grid-template-columns: 1fr;
+}
+
+.hideout-layout.stacked .hideout-summary {
+  position: static;
+  max-height: none;
+}
+
+.hideout-layout.summary-top {
+  grid-template-columns: 1fr;
+}
+
+.hideout-layout.summary-top .hideout-summary {
+  order: -1;
+  position: static;
+  max-height: none;
+}
+
+.layout-switch {
+  margin-left: auto;
+}
+
+.mode-btn.icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem 0.6rem;
+}
+
 @media (max-width: 900px) {
-  .hideout-layout {
+  .hideout-layout.side {
     grid-template-columns: 1fr;
   }
 }

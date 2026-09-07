@@ -24,7 +24,7 @@ export default function LoginPage() {
   return (
     <div className="auth-page">
       <div className="auth-card">
-        <h2>Acceso al Hideout</h2>
+        <h2>Acceso</h2>
         {error && <div className="auth-error">{error}</div>}
         <form onSubmit={handleSubmit}>
           <div className="form-group">

@@ -1,5 +1,6 @@
 import { aggregateRequirements } from '../utils/hideoutItems';
 import '../styles/hideout-summary.css';
+import { useTranslation } from '../hooks/useTranslation';
 
 function RaidIcon() {
   return (
@@ -24,6 +25,7 @@ function TradeIcon() {
 
 export default function HideoutSummary({ stations, itemsLookup }) {
   const { foundInRaid, regular } = aggregateRequirements(stations);
+  const { t } = useTranslation();
 
   if (foundInRaid.length === 0 && regular.length === 0) {
     return null;
@@ -34,14 +36,14 @@ export default function HideoutSummary({ stations, itemsLookup }) {
       <div className="summary-section raid">
         <div className="summary-header">
           <RaidIcon />
-          <span className="summary-title">En Raid</span>
+          <span className="summary-title">{t('firBadge')}</span>
           <span className="summary-count">{foundInRaid.length}</span>
         </div>
         <p className="summary-note">
-          Los ítems crafteados en el hideout también cuentan como "Encontrado en Raid".
+          {t('summaryNote')}
         </p>
         {foundInRaid.length === 0 ? (
-          <p className="summary-empty">Nada pendiente</p>
+          <p className="summary-empty">{t('nothingToShow')}</p>
         ) : (
           <ul>
             {foundInRaid.map((req) => {
@@ -60,11 +62,14 @@ export default function HideoutSummary({ stations, itemsLookup }) {
       <div className="summary-section regular">
         <div className="summary-header">
           <TradeIcon />
-          <span className="summary-title">Mercado / Craft</span>
+          <span className="summary-title">{t('notFoundInRaid')}</span>
           <span className="summary-count">{regular.length}</span>
         </div>
+        <p className="summary-note">
+          {t('summaryNote2')}
+        </p>
         {regular.length === 0 ? (
-          <p className="summary-empty">Nada pendiente</p>
+          <p className="summary-empty">{t('nothingToShow')}</p>
         ) : (
           <ul>
             {regular.map((req) => {
