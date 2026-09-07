@@ -45,7 +45,6 @@ export default function HideoutPage() {
   const [itemsLookup, setItemsLookup] = useState({});
   const [tradersLookup, setTradersLookup] = useState({});
   const [skillsLookup, setSkillsLookup] = useState({});
-  const [skillsLookup, setSkillsLookup] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [updatingId, setUpdatingId] = useState(null);
@@ -70,24 +69,18 @@ export default function HideoutPage() {
   // Comprueba qué ids de items/traders/skills NO están ya resueltos en los lookups dados,
   // y solo pide esos a la API. Devuelve los nuevos lookups parciales (pueden venir vacíos).
   async function resolveMissingLookups(stationsToCheck, knownItemsLookup, knownTradersLookup, knownSkillsLookup) {
-  async function resolveMissingLookups(stationsToCheck, knownItemsLookup, knownTradersLookup, knownSkillsLookup) {
     const allItemIds = extractItemIds(stationsToCheck);
     const allTraderIds = extractTraderIds(stationsToCheck);
-    const allSkillIds = extractSkillIds(stationsToCheck);
     const allSkillIds = extractSkillIds(stationsToCheck);
 
     const missingItemIds = allItemIds.filter((id) => !(id in knownItemsLookup));
     const missingTraderIds = allTraderIds.filter((id) => !(id in knownTradersLookup));
     const missingSkillIds = allSkillIds.filter((id) => !(id in knownSkillsLookup));
-    const missingSkillIds = allSkillIds.filter((id) => !(id in knownSkillsLookup));
 
-    if (missingItemIds.length === 0 && missingTraderIds.length === 0 && missingSkillIds.length === 0) {
-      return { items: {}, traders: {}, skills: {} };
     if (missingItemIds.length === 0 && missingTraderIds.length === 0 && missingSkillIds.length === 0) {
       return { items: {}, traders: {}, skills: {} };
     }
 
-    const [itemsResult, tradersResult, skillsResult] = await Promise.all([
     const [itemsResult, tradersResult, skillsResult] = await Promise.all([
       missingItemIds.length > 0
         ? axiosClient.get('/items', { params: { mode, lang: language, ids: missingItemIds.join(',') } })
@@ -104,7 +97,6 @@ export default function HideoutPage() {
       items: buildItemsLookup(itemsResult.data),
       traders: buildTradersLookup(tradersResult.data),
       skills: buildSkillsLookup(skillsResult.data),
-      skills: buildSkillsLookup(skillsResult.data),
     };
   }
 
@@ -116,10 +108,8 @@ export default function HideoutPage() {
       setStations(stationsData);
 
       const { items, traders, skills } = await resolveMissingLookups(stationsData, {}, {}, {});
-      const { items, traders, skills } = await resolveMissingLookups(stationsData, {}, {}, {});
       setItemsLookup(items);
       setTradersLookup(traders);
-      setSkillsLookup(skills);
       setSkillsLookup(skills);
     } catch (err) {
       setError('No se pudo cargar el hideout');
@@ -196,7 +186,6 @@ export default function HideoutPage() {
       {error && <div className="hideout-error">{error}</div>}
 
       <div className={`hideout-layout ${layout}`}>
-      <div className={`hideout-layout ${layout}`}>
         <div className="hideout-grid">
           {stations.map((station) => (
             <div
@@ -272,18 +261,6 @@ export default function HideoutPage() {
                                   level={s.level}
                                 />
                               ))}
-                              {levelReq.skillRequirements.map((s) => {
-                                const skill = skillsLookup[s.skill];
-                                return (
-                                  <RequirementChip
-                                    key={s.skill}
-                                    type="skill"
-                                    imageLink={skill?.imageLink}
-                                    label={skill ? skill.name : formatSkillCode(s.skill)}
-                                    level={s.level}
-                                  />
-                                );
-                              })}
                               {levelReq.skillRequirements.map((s) => {
                                 const skill = skillsLookup[s.skill];
                                 return (

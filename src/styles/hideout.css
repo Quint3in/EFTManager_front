@@ -81,7 +81,6 @@
 
 @media (max-width: 900px) {
   .hideout-layout.side {
-  .hideout-layout.side {
     grid-template-columns: 1fr;
   }
 }
@@ -348,21 +347,4 @@
 .station-card.is-updating {
   opacity: 0.55;
   pointer-events: none;
-}
-
-.mode-btn.icon-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.4rem 0.6rem;
-}
-
-.hideout-layout.summary-top {
-  grid-template-columns: 1fr;
-}
-
-.hideout-layout.summary-top .hideout-summary {
-  order: -1;
-  position: static;
-  max-height: none;
 }
