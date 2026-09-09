@@ -23,7 +23,7 @@ export default function AdminPage() {
       const { data } = await axiosClient.get('/admin/users');
       setUsers(data);
     } catch (err) {
-      setError('No se pudo cargar la lista de usuarios');
+      setError(t('adminUserListError'));
     } finally {
       setLoading(false);
     }
@@ -43,7 +43,7 @@ export default function AdminPage() {
       await axiosClient.delete(`/admin/users/${userToDelete.id}`);
       setUsers((prev) => prev.filter((u) => u.id !== userToDelete.id));
     } catch (err) {
-      setError(err.response?.data?.message || 'No se pudo eliminar el usuario');
+      setError(err.response?.data?.message || t('adminDeleteUserError'));
     } finally {
       setUserToDelete(null);
     }
@@ -54,7 +54,7 @@ export default function AdminPage() {
       await axiosClient.put(`/admin/users/${id}/role`, { role: newRole });
       setUsers((prev) => prev.map((u) => (u.id === id ? { ...u, role: newRole } : u)));
     } catch (err) {
-      setError(err.response?.data?.message || 'No se pudo cambiar el rol');
+      setError(err.response?.data?.message || t('adminChangeRoleError'));
       loadUsers(); // si falla (p.ej. intentar cambiarte tu propio rol), recarga para revertir el <select> a su valor real
     }
   }

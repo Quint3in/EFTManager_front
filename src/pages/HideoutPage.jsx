@@ -112,7 +112,7 @@ export default function HideoutPage() {
       setTradersLookup(traders);
       setSkillsLookup(skills);
     } catch (err) {
-      setError('No se pudo cargar el hideout');
+      setError(t('hideoutLoadError'));
     } finally {
       setLoading(false);
     }
@@ -140,7 +140,7 @@ export default function HideoutPage() {
 
       setStations(updatedStations);
     } catch (err) {
-      setError(err.response?.data?.message || 'No se pudo actualizar el nivel');
+      setError(err.response?.data?.message || t('hideoutSetLevelStationError'));
     } finally {
       setUpdatingId(null);
     }

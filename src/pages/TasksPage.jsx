@@ -167,7 +167,7 @@ export default function TasksPage() {
         });
       }
     } catch (err) {
-      setError('No se pudo actualizar la misión');
+      setError(t('taskUpdateError'));
     } finally {
       setUpdatingId(null);
     }

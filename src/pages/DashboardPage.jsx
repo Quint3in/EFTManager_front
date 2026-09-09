@@ -41,7 +41,7 @@ export default function DashboardPage() {
       const { data } = await axiosClient.get('/user/me');
       setProfile(data);
     } catch (err) {
-      setLoadError('No se pudo cargar el perfil');
+      setLoadError(t('dashboardLoadUserError'));
     } finally {
       setLoading(false);
     }
@@ -86,7 +86,7 @@ export default function DashboardPage() {
       setNewPassword('');
       setConfirmPassword('');
     } catch (err) {
-      setPasswordError(err.response?.data?.message || 'No se pudo cambiar la contraseña');
+      setPasswordError(err.response?.data?.message || t('dashboardChangePasswordError'));
     } finally {
       setSavingPassword(false);
     }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useSearchParams, useNavigate } from 'react-router-dom';
 import axiosClient from '../api/axiosClient';
 import { useGameMode } from '../context/GameModeContext';
@@ -31,6 +31,7 @@ export default function ItemsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const resultsRequestRef = useRef(0);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -47,10 +48,12 @@ export default function ItemsPage() {
   }, [mode, language]);
 
   useEffect(() => {
+    const requestId = resultsRequestRef.current + 1;
+    resultsRequestRef.current = requestId;
     if (showFavoritesOnly) {
-      loadFavoriteItems();
+      loadFavoriteItems(requestId);
     } else {
-      loadItems();
+      loadItems(requestId);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mode, language, debouncedQuery, categoryId, sort, page, showFavoritesOnly, favoriteIds]);
@@ -73,38 +76,44 @@ export default function ItemsPage() {
     }
   }
 
-  async function loadItems() {
+  async function loadItems(requestId) {
     setLoading(true);
     setError('');
     try {
       const { data } = await axiosClient.get('/items/search', {
         params: { mode, lang: language, query: debouncedQuery, categoryId: categoryId || undefined, sort, page, size: PAGE_SIZE },
       });
+      if (requestId !== resultsRequestRef.current) return;
       setResults(data);
     } catch (err) {
-      setError('No se pudo cargar los ítems');
+      if (requestId !== resultsRequestRef.current) return;
+      setError(t('itemLoadingError'));
     } finally {
-      setLoading(false);
+      if (requestId === resultsRequestRef.current) setLoading(false);
     }
   }
 
-  async function loadFavoriteItems() {
+  async function loadFavoriteItems(requestId) {
     setLoading(true);
     setError('');
     try {
       const ids = Array.from(favoriteIds);
       if (ids.length === 0) {
+        if (requestId !== resultsRequestRef.current) return;
         setResults({ content: [], totalPages: 0, totalElements: 0 });
+        setLoading(false);
         return;
       }
       const { data } = await axiosClient.get('/items/by-ids', {
         params: { mode, lang: language, ids: ids.join(',') },
       });
+      if (requestId !== resultsRequestRef.current) return;
       setResults({ content: data, totalPages: 1, totalElements: data.length });
     } catch (err) {
+      if (requestId !== resultsRequestRef.current) return;
       setError('No se pudieron cargar los favoritos');
     } finally {
-      setLoading(false);
+      if (requestId === resultsRequestRef.current) setLoading(false);
     }
   }
 

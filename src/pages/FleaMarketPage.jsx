@@ -56,7 +56,7 @@ export default function FleaMarketPage() {
       });
       setResults(data);
     } catch (err) {
-      setError('No se pudo cargar el mercado');
+      setError(t('fleaMarketLoadError'));
     } finally {
       setLoading(false);
     }

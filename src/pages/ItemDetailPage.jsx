@@ -83,7 +83,7 @@ export default function ItemDetailPage() {
         setBarterItemsLookup(buildItemsLookup(barterItemsData));
       }
     } catch (err) {
-      setError('No se pudo cargar el ítem');
+      setError(t('itemDetailLoadingError'));
     } finally {
       setLoading(false);
     }

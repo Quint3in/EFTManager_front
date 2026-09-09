@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useEffect, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react';
 import axiosClient from '../api/axiosClient';
 import { useGameMode } from './GameModeContext';
 
@@ -7,18 +7,24 @@ const FavoritesContext = createContext(null);
 export function FavoritesProvider({ children }) {
   const { mode } = useGameMode();
   const [favoriteIds, setFavoriteIds] = useState(new Set());
+  const favoritesRequestRef = useRef(0);
 
-  async function loadFavorites() {
+  async function loadFavorites(requestId) {
     try {
       const { data } = await axiosClient.get('/favorites', { params: { mode } });
+      if (requestId !== favoritesRequestRef.current) return;
       setFavoriteIds(new Set(data));
     } catch {
+      if (requestId !== favoritesRequestRef.current) return;
       setFavoriteIds(new Set());
     }
   }
 
   useEffect(() => {
-    loadFavorites();
+    const requestId = favoritesRequestRef.current + 1;
+    favoritesRequestRef.current = requestId;
+    setFavoriteIds(new Set());
+    loadFavorites(requestId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mode]);
 

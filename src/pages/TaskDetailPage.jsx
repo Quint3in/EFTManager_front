@@ -149,7 +149,7 @@ export default function TaskDetailPage() {
         });
       }
     } catch {
-      setError('No se pudo actualizar la misión');
+      setError(t('taskUpdateError'));
     } finally {
       setUpdating(false);
     }
